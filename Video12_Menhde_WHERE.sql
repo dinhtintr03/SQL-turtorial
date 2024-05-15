@@ -78,3 +78,32 @@ WHERE Freight >= 50 AND Freight <= 100;
 SELECT *
 FROM Products
 WHERE UnitsInStock > 20 AND UnitsOnOrder < 20;
+
+-- BETWEEN
+--chọn các giá trị trong một phạm vi nhất định
+--các giá trị có thể là số, văn bản hoặc ngày tháng
+-- WHERE column_name BETWEEN value1 AND value2
+
+--VD1: Lấy danh sách các sản phẩm có giá bán khoảng từ 10 -> 20 đô
+SELECT *
+FROM Products
+WHERE UnitPrice BETWEEN 10 AND 20;
+
+--VD2: Lấy danh sách các đơn đặt hàng được đặt trong khoảng thời gian 
+-- từ 1996-07-01 đến ngày 1996-07-31
+SELECT *
+FROM Orders
+WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+
+--VD3: Tính tổng số tiền vận chuyển (Freight) của các đơn đặt hàng được đặt trong
+-- khoảng thời gian từ 1996-07-01 đến 1996-07-31
+SELECT SUM(Freight) AS "Tổng số tiền vận chuyển"
+FROM Orders
+WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+
+--BT1: Lấy danh sách các đơn đặt hàng có ngày đặt trong khoảng
+--từ 1/1/1997 đến gày 31/12/1997 và được vận chuyển bằng đường tàu thủy (ShipVia = 3)
+SELECT *
+FROM Orders
+WHERE	OrderDate BETWEEN '1997-01-01' AND '1997-12-31'
+		AND ShipVia = 3;
