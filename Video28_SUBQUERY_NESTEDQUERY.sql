@@ -30,3 +30,21 @@ GROUP BY c.ContactName
 HAVING COUNT(o.OrderID) > 10
 
 -- SUB QUERY
+SELECT *
+FROM Customers
+WHERE CustomerID IN (
+		SELECT CustomerID
+		FROM Orders
+		GROUP BY CustomerID
+		HAVING COUNT(OrderID) > 10
+)
+
+-- Tính tổng số tiền cho từng đơn hàng 
+SELECT *, (
+		SELECT SUM(od.Quantity * od.UnitPrice)
+		FROM [Order Details] AS od
+		WHERE o.OrderID = od.OrderID
+)
+FROM Orders AS o
+
+-- Lọc ra tên sản phẩm và tổng số đơn hàng của sản phẩm 
